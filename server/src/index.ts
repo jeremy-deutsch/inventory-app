@@ -7,31 +7,19 @@ interface Context {
 
 const resolvers = {
   Query: {
-    feed: (parent: unknown, args: unknown, context: Context) => {
-      return context.prisma.posts({ where: { published: true } });
-    },
-    drafts: (parent: unknown, args: unknown, context: Context) => {
-      return context.prisma.posts({ where: { published: false } });
-    },
-    post: (parent: unknown, { id }: any, context: Context) => {
-      return context.prisma.post({ id });
+    list(parent: unknown, args: unknown, context: Context) {
+      return context.prisma.items();
     }
   },
   Mutation: {
-    createDraft(parent: unknown, { title, content }: any, context: Context) {
-      return context.prisma.createPost({
-        title,
-        content
-      });
+    // the args are typed as any due to a deep, weird type error
+    async add(parent: unknown, { item }: any, context: Context) {
+      await context.prisma.createItem({ value: item });
+      return context.prisma.items();
     },
-    deletePost(parent: unknown, { id }: any, context: Context) {
-      return context.prisma.deletePost({ id });
-    },
-    publish(parent: unknown, { id }: any, context: Context) {
-      return context.prisma.updatePost({
-        where: { id },
-        data: { published: true }
-      });
+    async delete(parent: unknown, { id }: any, context: Context) {
+      await context.prisma.deleteItem({ id });
+      return context.prisma.items();
     }
   }
 };

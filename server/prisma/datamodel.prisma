@@ -1,6 +1,4 @@
-type Post {
+type Item {
   id: ID! @id
-  published: Boolean! @default(value: false)
-  title: String!
-  content: String!
+  value: String!
 }
