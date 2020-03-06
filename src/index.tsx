@@ -1,24 +1,25 @@
-import React, {Fragment} from 'react'
-import ReactDOM from 'react-dom'
+import React, { Fragment } from "react";
+import ReactDOM from "react-dom";
 import {
   NavLink,
   Link,
   BrowserRouter as Router,
   Route,
-  Switch,
-} from 'react-router-dom'
-import { ApolloProvider } from 'react-apollo'
-import ApolloClient from 'apollo-boost'
+  Switch
+  // @ts-ignore I won't be using react-router-dom
+} from "react-router-dom";
+import { ApolloProvider } from "react-apollo";
+import ApolloClient from "apollo-boost";
 
-import FeedPage from './components/FeedPage'
-import DraftsPage from './components/DraftsPage'
-import CreatePage from './components/CreatePage'
-import DetailPage from './components/DetailPage'
+import FeedPage from "./components/FeedPage";
+import DraftsPage from "./components/DraftsPage";
+import CreatePage from "./components/CreatePage";
+import DetailPage from "./components/DetailPage";
 
-import 'tachyons'
-import './index.css'
+import "tachyons";
+import "./index.css";
 
-const client = new ApolloClient({ uri: 'http://localhost:4000' })
+const client = new ApolloClient({ uri: "http://localhost:4000" });
 
 ReactDOM.render(
   <ApolloProvider client={client}>
@@ -68,5 +69,5 @@ ReactDOM.render(
       </Fragment>
     </Router>
   </ApolloProvider>,
-  document.getElementById('root'),
-)
+  document.getElementById("root")
+);
